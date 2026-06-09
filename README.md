@@ -2,7 +2,7 @@
 
 Code release for **physics-structured deep learning for flow-boiling heat transfer coefficient prediction under refrigerant transition**.
 
-This repository provides the reviewer-facing implementation of the Distributed-DNN workflow used for boiling heat transfer coefficient prediction in plate heat exchangers. The release includes core Distributed-DNN training, monolithic ANN baseline training, transfer-learning configuration examples, and case-wise evaluation utilities.
+This repository provides the Public implementation of the Distributed-DNN workflow used for boiling heat transfer coefficient prediction in plate heat exchangers. The release includes core Distributed-DNN training, monolithic ANN baseline training, transfer-learning configuration examples, and case-wise evaluation utilities.
 
 The full reconstructed experimental database and manuscript plotting scripts are intentionally excluded from this public code release.
 
