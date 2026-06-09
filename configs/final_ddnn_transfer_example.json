@@ -1,0 +1,189 @@
+{
+  "excel_path": "data/database_not_redistributed.xlsx",
+  "groups_by_pressure": {
+    "HighP": [
+      "R32",
+      "R410A"
+    ],
+    "MediumP": [
+      "R134a",
+      "R1234yf",
+      "R1234ze(E)",
+      "R513A"
+    ],
+    "LowP": [
+      "R245fa",
+      "R1233zd(E)"
+    ],
+    "ETC": [
+      "Water",
+      "Ammonia",
+      "R290"
+    ]
+  },
+  "run_group": [
+    "all"
+  ],
+  "run_sheets": [],
+  "exclude_sheets": [],
+  "features": {
+    "properties": [
+      "density_l",
+      "density_v",
+      "dynamic viscosity_l",
+      "dynamic viscosity_v",
+      "thermal conductivity_l",
+      "thermal conductivity_v",
+      "specific heat_l",
+      "specific heat_v",
+      "Surface tension",
+      "Latent heat"
+    ],
+    "geometry": [
+      "corrugation angle",
+      "corrugation depth",
+      "pitch",
+      "effective hydraulic diameter"
+    ],
+    "flow_raw": {
+      "G": "G",
+      "x": "Xmean",
+      "qpp": "qw"
+    },
+    "props_alias": {
+      "rho_l": "density_l",
+      "rho_g": "density_v"
+    },
+    "flow_features": [
+      "u_g",
+      "u_l",
+      "u_mean",
+      "q_pp"
+    ]
+  },
+  "drop_from_inputs": [
+    "Tsat"
+  ],
+  "target": "h",
+  "standardize": true,
+  "target_norm": {
+    "normalize_y": true,
+    "eps": 1e-12
+  },
+  "val_strategy": {
+    "type": "per_sheet_random",
+    "val_ratio": 0.2,
+    "random_state": 14
+  },
+  "reproducibility": {
+    "seed": 14
+  },
+  "model": {
+    "activation": "relu",
+    "props_layers": [
+      88
+    ],
+    "flow_layers": [
+      88
+    ],
+    "geo_layers": [
+      88
+    ],
+    "shared_layers": [
+      88,
+      88,
+      88
+    ],
+    "dropout": 0.0,
+    "dropout_per_branch": {
+      "props": 0.0,
+      "flow": 0.0,
+      "geo": 0.0
+    },
+    "use_layernorm": true,
+    "lambda_entropy": -0.01,
+    "lambda_temperature": 1.5
+  },
+  "training": {
+    "epochs": 1000,
+    "batch_size": 64,
+    "optimizer": {
+      "name": "adam",
+      "lr": 0.001
+    },
+    "early_stopping": {
+      "patience": 300,
+      "min_delta": 0.0001
+    }
+  },
+  "out_dir": "outputs/final_ddnn_transfer",
+  "save_plots": false,
+  "init_from_xlsx": "checkpoints/pivot_B1_S3_W88/weights_bias_and_logs.xlsx",
+  "init_ignore_missing": true,
+  "finetune": {
+    "freeze": {
+      "props": false,
+      "flow": true,
+      "geo": true,
+      "shared": false,
+      "lambda": true
+    }
+  },
+  "pivot_source": {
+    "D_d": 1,
+    "D_sh": 3,
+    "W": 88,
+    "train_MAPE": 2.175304120536998,
+    "val_MAPE": 4.284245261040033,
+    "AVG_MAPE": 2.597092348637605,
+    "train_R2": 0.9984306637628346,
+    "val_R2": 0.9892704012807569,
+    "AVG_R2": 0.996598611266419,
+    "best_epoch": 233,
+    "pivot_name": "B1_S3_W88"
+  },
+  "hp_grid": {
+    "lambda_entropy": [
+      -0.01,
+      -0.001,
+      0.01,
+      0.001
+    ],
+    "lambda_temperature": [
+      0.8,
+      1.0,
+      1.2,
+      1.4,
+      1.5
+    ],
+    "lr": [
+      0.001,
+      0.005,
+      0.01
+    ]
+  },
+  "run_name_override": "final_ddnn_transfer_example",
+  "best_case_metadata": {
+    "rank": 3,
+    "arch_Dd_Dsh_W": [
+      1,
+      3,
+      88
+    ],
+    "freeze_code_order_prop_geo_flow_shared_lambda": "01101",
+    "freeze_mask": {
+      "props": false,
+      "geo": true,
+      "flow": true,
+      "shared": false,
+      "lambda": true
+    },
+    "optimizer": {
+      "lr": 0.001,
+      "lambda_entropy": -0.01,
+      "lambda_temperature": 1.5
+    },
+    "mape_ref_from_grid": 1.5996,
+    "base_config": "configs/final_ddnn_transfer_example.json"
+  }
+}

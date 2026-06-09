@@ -1,0 +1,99 @@
+{
+  "excel_path": "data/database_not_redistributed.xlsx",
+  "groups_by_pressure": {
+    "HighP": [
+      "R32",
+      "R410A"
+    ],
+    "MediumP": [
+      "R134a",
+      "R1234yf",
+      "R1234ze(E)",
+      "R513A"
+    ],
+    "LowP": [
+      "R245fa",
+      "R1233zd(E)"
+    ],
+    "ETC": [
+      "Water",
+      "Ammonia",
+      "R290"
+    ]
+  },
+  "run_group": [
+    "all"
+  ],
+  "run_sheets": [],
+  "exclude_sheets": [],
+  "features": {
+    "properties": [
+      "density_l",
+      "density_v",
+      "dynamic viscosity_l",
+      "dynamic viscosity_v",
+      "thermal conductivity_l",
+      "thermal conductivity_v",
+      "specific heat_l",
+      "specific heat_v",
+      "Surface tension",
+      "Latent heat"
+    ],
+    "geometry": [
+      "corrugation angle",
+      "corrugation depth",
+      "pitch",
+      "effective hydraulic diameter"
+    ],
+    "flow_raw": {
+      "G": "G",
+      "x": "Xmean",
+      "qpp": "qw"
+    },
+    "props_alias": {
+      "rho_l": "density_l",
+      "rho_g": "density_v"
+    },
+    "flow_features": [
+      "u_g",
+      "u_l",
+      "u_mean",
+      "q_pp"
+    ]
+  },
+  "drop_from_inputs": [
+    "Tsat"
+  ],
+  "target": "h",
+  "standardize": true,
+  "target_norm": {
+    "normalize_y": true,
+    "eps": 1e-12
+  },
+  "val_strategy": {
+    "type": "per_sheet_random",
+    "val_ratio": 0.2,
+    "random_state": 14
+  },
+  "reproducibility": {
+    "seed": 14
+  },
+  "model": {
+    "note": "This block is kept only to document the shared 18-input schema. The monolithic baseline architecture is set through command-line arguments in code/train_monolithic.py.",
+    "activation": "relu"
+  },
+  "training": {
+    "epochs": 500,
+    "batch_size": 64,
+    "optimizer": {
+      "name": "adam",
+      "lr": 0.001
+    },
+    "early_stopping": {
+      "patience": 100,
+      "min_delta": 0.0001
+    }
+  },
+  "out_dir": "outputs/monolithic_baseline",
+  "save_plots": false
+}
