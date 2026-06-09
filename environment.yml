@@ -1,0 +1,13 @@
+name: ddnn-htc
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10.18
+  - pip
+  - pip:
+      - tensorflow==2.20.0
+      - numpy==2.2.6
+      - pandas==2.3.2
+      - openpyxl==3.1.5
+      - XlsxWriter==3.2.9
+      - matplotlib==3.10.6
