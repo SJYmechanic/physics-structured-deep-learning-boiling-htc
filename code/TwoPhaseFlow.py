@@ -155,7 +155,7 @@ def compute_flow_features(
 
     u_g = (x * G) / rho_g
     u_l = ((1.0 - x) * G) / rho_l
-    u_m = u_g + u_l
+    u_m = (u_g + u_l)/2
 
     out = {"u_g": u_g, "u_l": u_l, "u_mean": u_m}
     if include_qpp and col_qpp:
